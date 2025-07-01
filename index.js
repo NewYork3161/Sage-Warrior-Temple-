@@ -8,17 +8,17 @@ const PORT = process.env.PORT || 3000;
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Serve static assets (CSS, images, JS)
+// Serve static files (CSS, JS, images)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Home Route → loads index.ejs
+// Home route
 app.get('/', (req, res) => {
   res.render('index');
 });
 
-// Image Page Route → loads show_image.ejs
-app.get('/pay-your-teacher', (req, res) => {
-  res.render('index');
+// Route to serve sitemap.xml
+app.get('/sitemap.xml', (req, res) => {
+  res.sendFile(path.join(__dirname, 'sitemap.xml'));
 });
 
 // Start server
