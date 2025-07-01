@@ -1,30 +1,27 @@
 const express = require('express');
 const path = require('path');
-const methodOverride = require('method-override');
-const session = require('express-session');
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-// View engine setup
+// Set view engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Middleware
+// Serve static assets (CSS, images, JS)
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method'));
-app.use(session({
-    secret: 'sageSecretKey',
-    resave: false,
-    saveUninitialized: true
-}));
 
-// Routes
+// Home Route → loads index.ejs
 app.get('/', (req, res) => {
-    res.render('index', { title: 'Welcome' });
+  res.render('index');
 });
 
-// Server
-app.listen(3000, () => {
-    console.log('Server running at http://localhost:3000');
+// Image Page Route → loads show_image.ejs
+app.get('/pay-your-teacher', (req, res) => {
+  res.render('index');
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
 });
